@@ -9,6 +9,8 @@ import (
 	"github.com/timescale/tsbs/pkg/targets/constants"
 	"github.com/timescale/tsbs/pkg/targets/crate"
 	"github.com/timescale/tsbs/pkg/targets/influx"
+	"github.com/timescale/tsbs/pkg/targets/iotdb"
+	"github.com/timescale/tsbs/pkg/targets/kaiwudb"
 	"github.com/timescale/tsbs/pkg/targets/mongo"
 	"github.com/timescale/tsbs/pkg/targets/prometheus"
 	"github.com/timescale/tsbs/pkg/targets/questdb"
@@ -45,6 +47,10 @@ func GetTarget(format string) targets.ImplementedTarget {
 		return timestream.NewTarget()
 	case constants.FormatQuestDB:
 		return questdb.NewTarget()
+	case constants.FormatIoTDB:
+		return iotdb.NewTarget()
+	case constants.FormatKaiwuDB:
+		return kaiwudb.NewTarget()
 	}
 
 	supportedFormatsStr := strings.Join(constants.SupportedFormats(), ",")
