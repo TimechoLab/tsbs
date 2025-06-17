@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/common"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/common"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 const (

@@ -12,8 +12,8 @@ import (
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 // Program option vars:
@@ -56,22 +56,23 @@ func main() {
 }
 
 type processor struct {
-//	url string
-//	prettyPrintResponses bool	
+	//	url string
+	//	prettyPrintResponses bool
 	w    *HTTPClient
 	opts *HTTPClientDoOptions
 }
 
 func newProcessor() query.Processor { return &processor{} }
+
 // query.Processor interface implementation
 func (p *processor) Init(workerNum int) {
 	// p.url = vmURLs[workerNum%len(vmURLs)]
 	// p.prettyPrintResponses = runner.DoPrintResponses()
 	p.opts = &HTTPClientDoOptions{
-//		Debug:                runner.DebugLevel(),
+		//		Debug:                runner.DebugLevel(),
 		PrettyPrintResponses: runner.DoPrintResponses(),
-//		chunkSize:            chunkSize,
-//		database:             runner.DatabaseName(),
+		//		chunkSize:            chunkSize,
+		//		database:             runner.DatabaseName(),
 	}
 	url := vmURLs[workerNum%len(vmURLs)]
 	p.w = NewHTTPClient(url)

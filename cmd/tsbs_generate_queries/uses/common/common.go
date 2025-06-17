@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
-	internalutils "github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
+	internalutils "github.com/timescale/tsbs/internal/utils"
 )
 
 const (

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/pkg/query"
 	"go.mongodb.org/mongo-driver/bson"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 func init() {
@@ -44,14 +44,13 @@ func (d *NaiveDevops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRa
 	metrics, err := devops.GetCPUMetricsSlice(numMetrics)
 	panicIfErr(err)
 
-
 	pipelineQuery := []bson.M{
 		{
 			"$match": bson.M{
 				"measurement": "cpu",
-                "time": bson.M{
-                    "$gte": interval.Start(),
-                    "$lt":  interval.End(),
+				"time": bson.M{
+					"$gte": interval.Start(),
+					"$lt":  interval.End(),
 				},
 				"tags.hostname": bson.M{
 					"$in": hostnames,
@@ -59,14 +58,14 @@ func (d *NaiveDevops) GroupByTime(qi query.Query, nHosts, numMetrics int, timeRa
 			},
 		},
 		{
-            "$group": bson.M{
-                "_id": bson.M{
-                    "$dateTrunc": bson.M{"date": "$time", "unit": "minute"},
+			"$group": bson.M{
+				"_id": bson.M{
+					"$dateTrunc": bson.M{"date": "$time", "unit": "minute"},
 				},
 			},
 		},
-	    {
-    			"$sort": bson.M{"_id": 1},
+		{
+			"$sort": bson.M{"_id": 1},
 		},
 	}
 	resultMap := pipelineQuery[1]["$group"].(bson.M)
@@ -98,38 +97,38 @@ func (d *NaiveDevops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 		{
 			"$match": bson.M{
 				"measurement": "cpu",
-                "time": bson.M{
-                    "$gte": interval.Start(),
-                    "$lt":  interval.End(),
+				"time": bson.M{
+					"$gte": interval.Start(),
+					"$lt":  interval.End(),
 				},
 			},
 		},
 		{
 			"$group": bson.M{
-                "_id": bson.M{
-                    "time": bson.M{
-                        "$dateTrunc": bson.M{"date": "$time", "unit": "hour"},
+				"_id": bson.M{
+					"time": bson.M{
+						"$dateTrunc": bson.M{"date": "$time", "unit": "hour"},
 					},
 					"hostname": "$tags.hostname",
 				},
 			},
 		},
 		{
-            "$sort": bson.D{{"_id.time", 1}, {"_id.hostname", 1}},
-        },
-    }
-    resultMap := pipelineQuery[1]["$group"].(bson.M)
-    for _, metric := range metrics {
-        resultMap["avg_"+metric] = bson.M{"$avg": "$" + metric}
+			"$sort": bson.D{{"_id.time", 1}, {"_id.hostname", 1}},
+		},
+	}
+	resultMap := pipelineQuery[1]["$group"].(bson.M)
+	for _, metric := range metrics {
+		resultMap["avg_"+metric] = bson.M{"$avg": "$" + metric}
 	}
 
 	humanLabel := devops.GetDoubleGroupByLabel("Mongo [NAIVE]", numMetrics)
-    	q := qi.(*query.Mongo)
-    	q.HumanLabel = []byte(humanLabel)
-    	q.BsonDoc = pipelineQuery
-    	q.CollectionName = []byte("point_data")
-    	q.HumanDescription = []byte(fmt.Sprintf("%s: %s (%s)", humanLabel, interval.StartString(), q.CollectionName))
-    }
+	q := qi.(*query.Mongo)
+	q.HumanLabel = []byte(humanLabel)
+	q.BsonDoc = pipelineQuery
+	q.CollectionName = []byte("point_data")
+	q.HumanDescription = []byte(fmt.Sprintf("%s: %s (%s)", humanLabel, interval.StartString(), q.CollectionName))
+}
 
 // MaxAllCPU selects the MAX of all metrics under 'cpu' per hour for nhosts hosts,
 // e.g. in pseudo-SQL:
@@ -139,34 +138,34 @@ func (d *NaiveDevops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 // AND time >= '$HOUR_START' AND time < '$HOUR_END'
 // GROUP BY hour ORDER BY hour
 func (d *NaiveDevops) MaxAllCPU(qi query.Query, nHosts int, duration time.Duration) {
-    interval := d.Interval.MustRandWindow(duration)
-    hostnames, err := d.GetRandomHosts(nHosts)
-    panicIfErr(err)
-    metrics := devops.GetAllCPUMetrics()
+	interval := d.Interval.MustRandWindow(duration)
+	hostnames, err := d.GetRandomHosts(nHosts)
+	panicIfErr(err)
+	metrics := devops.GetAllCPUMetrics()
 
-    pipelineQuery := []bson.M{
-        {
-            "$match": bson.M{
-                "measurement": "cpu",
-                "tags.hostname": bson.M{
-                    "$in": hostnames,
-                },
-                "time": bson.M{
-                    "$gte": interval.Start(),
-                    "$lt":  interval.End(),
-                },
-            },
-        },
-        {
-            "$group": bson.M{
-                "_id": bson.M{
-                    "$dateTrunc": bson.M{"date": "$time", "unit": "hour"},
-                },
-        },
+	pipelineQuery := []bson.M{
+		{
+			"$match": bson.M{
+				"measurement": "cpu",
+				"tags.hostname": bson.M{
+					"$in": hostnames,
+				},
+				"time": bson.M{
+					"$gte": interval.Start(),
+					"$lt":  interval.End(),
+				},
+			},
 		},
 		{
-            "$sort": bson.M{"_id": 1},
-        },
+			"$group": bson.M{
+				"_id": bson.M{
+					"$dateTrunc": bson.M{"date": "$time", "unit": "hour"},
+				},
+			},
+		},
+		{
+			"$sort": bson.M{"_id": 1},
+		},
 	}
 	resultMap := pipelineQuery[1]["$group"].(bson.M)
 	for _, metric := range metrics {
@@ -192,29 +191,29 @@ func (d *NaiveDevops) HighCPUForHosts(qi query.Query, nHosts int) {
 	interval := d.Interval.MustRandWindow(devops.HighCPUDuration)
 	pipelineQuery := []bson.M{}
 
-    // Must match in the documents that correspond to time, as well as optionally
-    // filter on those with the correct host if nHosts > 0
-    match := bson.M{
-        "$match": bson.M{
-            "measurement": "cpu",
-            "time": bson.M{
-                "$gte": interval.Start(),
-                "$lt":  interval.End(),
-            },
-            "usage_user": bson.M{"$gt": 90.0},
-        },
-    }
-    if nHosts > 0 {
-        hostnames, err := d.GetRandomHosts(nHosts)
-        panicIfErr(err)
-        matchMap := match["$match"].(bson.M)
-        matchMap["tags.hostname"] = bson.M{"$in": hostnames}
-    }
-    pipelineQuery = append(pipelineQuery, match)
-    pipelineQuery = append(pipelineQuery, bson.M{"$set": bson.M{"tags": "$tags.hostname"}})
+	// Must match in the documents that correspond to time, as well as optionally
+	// filter on those with the correct host if nHosts > 0
+	match := bson.M{
+		"$match": bson.M{
+			"measurement": "cpu",
+			"time": bson.M{
+				"$gte": interval.Start(),
+				"$lt":  interval.End(),
+			},
+			"usage_user": bson.M{"$gt": 90.0},
+		},
+	}
+	if nHosts > 0 {
+		hostnames, err := d.GetRandomHosts(nHosts)
+		panicIfErr(err)
+		matchMap := match["$match"].(bson.M)
+		matchMap["tags.hostname"] = bson.M{"$in": hostnames}
+	}
+	pipelineQuery = append(pipelineQuery, match)
+	pipelineQuery = append(pipelineQuery, bson.M{"$set": bson.M{"tags": "$tags.hostname"}})
 
-    humanLabel, err := devops.GetHighCPULabel("Mongo", nHosts)
-    panicIfErr(err)
+	humanLabel, err := devops.GetHighCPULabel("Mongo", nHosts)
+	panicIfErr(err)
 	q := qi.(*query.Mongo)
 	q.HumanLabel = []byte(humanLabel)
 	q.BsonDoc = pipelineQuery
@@ -231,7 +230,7 @@ func (d *NaiveDevops) LastPointPerHost(qi query.Query) {
 		{"$sort": bson.D{{"tags.hostname", 1}, {"time", -1}}},
 		{
 			"$group": bson.M{
-                "_id":              bson.M{"hostname": "$tags.hostname"},
+				"_id":              bson.M{"hostname": "$tags.hostname"},
 				"time":             bson.M{"$first": "$time"},
 				"usage_guest":      bson.M{"$first": "$usage_guest"},
 				"usage_guest_nice": bson.M{"$first": "$usage_guest_nice"},
@@ -259,43 +258,43 @@ func (d *NaiveDevops) LastPointPerHost(qi query.Query) {
 // GroupByOrderByLimit populates a query.Query that has a time WHERE clause, that groups by a
 // truncated date, orders by that date, and takes a limit, e.g. in pseudo-SQL:
 //
- // SELECT minute, MAX(usage_user) FROM cpu
+// SELECT minute, MAX(usage_user) FROM cpu
 // WHERE time < '$TIME'
- // GROUP BY minute ORDER BY minute DESC
- // LIMIT $LIMIT
- func (d *NaiveDevops) GroupByOrderByLimit(qi query.Query) {
- 	interval := d.Interval.MustRandWindow(time.Hour)
- 	interval, err := utils.NewTimeInterval(d.Interval.Start(), interval.End())
- 	if err != nil {
- 		panic(err.Error())
- 	}
+// GROUP BY minute ORDER BY minute DESC
+// LIMIT $LIMIT
+func (d *NaiveDevops) GroupByOrderByLimit(qi query.Query) {
+	interval := d.Interval.MustRandWindow(time.Hour)
+	interval, err := utils.NewTimeInterval(d.Interval.Start(), interval.End())
+	if err != nil {
+		panic(err.Error())
+	}
 
- 	pipelineQuery := []bson.M{
- 		{
- 			"$match": bson.M{
- 				"measurement": "cpu",
- 				"time": bson.M{
- 					"$gte": interval.Start(),
- 					"$lt":  interval.End(),
- 				},
- 			},
- 		},
- 		{
- 			"$group": bson.M{
- 				"_id": bson.M{
- 					"$dateTrunc": bson.M{"date": "$time", "unit": "minute"},
- 				},
- 				"max_value": bson.M{"$max": "$usage_user"},
- 			},
- 		},
- 		{"$sort": bson.M{"_id": -1}},
- 		{"$limit": 5},
- 	}
+	pipelineQuery := []bson.M{
+		{
+			"$match": bson.M{
+				"measurement": "cpu",
+				"time": bson.M{
+					"$gte": interval.Start(),
+					"$lt":  interval.End(),
+				},
+			},
+		},
+		{
+			"$group": bson.M{
+				"_id": bson.M{
+					"$dateTrunc": bson.M{"date": "$time", "unit": "minute"},
+				},
+				"max_value": bson.M{"$max": "$usage_user"},
+			},
+		},
+		{"$sort": bson.M{"_id": -1}},
+		{"$limit": 5},
+	}
 
- 	humanLabel := "Mongo max cpu over last 5 min-intervals (random end)"
- 	q := qi.(*query.Mongo)
- 	q.HumanLabel = []byte(humanLabel)
- 	q.BsonDoc = pipelineQuery
- 	q.CollectionName = []byte("point_data")
- 	q.HumanDescription = []byte(fmt.Sprintf("%s: %s", humanLabel, interval.EndString()))
- }
+	humanLabel := "Mongo max cpu over last 5 min-intervals (random end)"
+	q := qi.(*query.Mongo)
+	q.HumanLabel = []byte(humanLabel)
+	q.BsonDoc = pipelineQuery
+	q.CollectionName = []byte("point_data")
+	q.HumanDescription = []byte(fmt.Sprintf("%s: %s", humanLabel, interval.EndString()))
+}

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
-	"github.com/TimechoLab/tsbs/pkg/targets/constants"
+	"github.com/timescale/tsbs/pkg/data/usecases/common"
+	"github.com/timescale/tsbs/pkg/targets/constants"
 )
 
 const (

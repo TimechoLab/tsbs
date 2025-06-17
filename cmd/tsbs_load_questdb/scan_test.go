@@ -7,7 +7,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 )
 
 func TestBatch(t *testing.T) {

@@ -1,18 +1,18 @@
 package main
 
 import (
-    "context"
+	"context"
 	"log"
 	"sync"
 	"time"
 
-    "go.mongodb.org/mongo-driver/bson"
-    "go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/TimechoLab/tsbs/load"
-	"github.com/TimechoLab/tsbs/pkg/targets"
-    tsbsMongo "github.com/TimechoLab/tsbs/pkg/targets/mongo"
+	"github.com/timescale/tsbs/load"
+	"github.com/timescale/tsbs/pkg/targets"
+	tsbsMongo "github.com/timescale/tsbs/pkg/targets/mongo"
 )
 
 // naiveBenchmark allows you to run a benchmark using the naive, one document per
@@ -62,49 +62,49 @@ func (p *naiveProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uin
 	p.pvs = p.pvs[:len(batch)]
 	var metricCnt uint64
 	if randomFieldOrder {
-        for i, event := range batch {
-            x := spPool.Get().(*singlePoint)
-            (*x)["measurement"] = string(event.MeasurementName())
-            (*x)[timestampField] = time.Unix(0, event.Timestamp())
-            (*x)["tags"] = map[string]string{}
-            f := &tsbsMongo.MongoReading{}
-            for j := 0; j < event.FieldsLength(); j++ {
-                event.Fields(f, j)
-                (*x)[string(f.Key())] = f.Value()
-            }
-            t := &tsbsMongo.MongoTag{}
-            for j := 0; j < event.TagsLength(); j++ {
-                event.Tags(t, j)
-                (*x)["tags"].(map[string]string)[string(t.Key())] = string(t.Value())
-            }
-            p.pvs[i] = x
-            metricCnt += uint64(event.FieldsLength())
+		for i, event := range batch {
+			x := spPool.Get().(*singlePoint)
+			(*x)["measurement"] = string(event.MeasurementName())
+			(*x)[timestampField] = time.Unix(0, event.Timestamp())
+			(*x)["tags"] = map[string]string{}
+			f := &tsbsMongo.MongoReading{}
+			for j := 0; j < event.FieldsLength(); j++ {
+				event.Fields(f, j)
+				(*x)[string(f.Key())] = f.Value()
+			}
+			t := &tsbsMongo.MongoTag{}
+			for j := 0; j < event.TagsLength(); j++ {
+				event.Tags(t, j)
+				(*x)["tags"].(map[string]string)[string(t.Key())] = string(t.Value())
+			}
+			p.pvs[i] = x
+			metricCnt += uint64(event.FieldsLength())
 		}
-    } else {
-            for i, event := range batch {
-                x := bson.D{}
-                x = append(x, bson.E{"measurement", string(event.MeasurementName())})
-                x = append(x, bson.E{timestampField, time.Unix(0, event.Timestamp())})
-                f := &tsbsMongo.MongoReading{}
-                for j := 0; j < event.FieldsLength(); j++ {
-                    event.Fields(f, j)
-                    x = append(x, bson.E{string(f.Key()), f.Value()})
-                }
-                t := &tsbsMongo.MongoTag{}
-                tags := bson.D{}
-                for j := 0; j < event.TagsLength(); j++ {
-                    event.Tags(t, j)
-                    tags = append(tags, bson.E{string(t.Key()), string(t.Value())})
-                }
-                x = append(x, bson.E{"tags", tags})
-                p.pvs[i] = x
-                metricCnt += uint64(event.FieldsLength())
+	} else {
+		for i, event := range batch {
+			x := bson.D{}
+			x = append(x, bson.E{"measurement", string(event.MeasurementName())})
+			x = append(x, bson.E{timestampField, time.Unix(0, event.Timestamp())})
+			f := &tsbsMongo.MongoReading{}
+			for j := 0; j < event.FieldsLength(); j++ {
+				event.Fields(f, j)
+				x = append(x, bson.E{string(f.Key()), f.Value()})
+			}
+			t := &tsbsMongo.MongoTag{}
+			tags := bson.D{}
+			for j := 0; j < event.TagsLength(); j++ {
+				event.Tags(t, j)
+				tags = append(tags, bson.E{string(t.Key()), string(t.Value())})
+			}
+			x = append(x, bson.E{"tags", tags})
+			p.pvs[i] = x
+			metricCnt += uint64(event.FieldsLength())
 		}
 	}
 
 	if doLoad {
-        opts := options.InsertMany().SetOrdered(orderedInserts)
-        _, err := p.collection.InsertMany(context.Background(), p.pvs, opts)
+		opts := options.InsertMany().SetOrdered(orderedInserts)
+		_, err := p.collection.InsertMany(context.Background(), p.pvs, opts)
 		if err != nil {
 			log.Fatalf("Bulk insert docs err: %s\n", err.Error())
 		}

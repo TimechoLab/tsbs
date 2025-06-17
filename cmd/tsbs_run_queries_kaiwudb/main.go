@@ -7,14 +7,14 @@ import (
 	"log"
 	"time"
 
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
-	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb"
-	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb/commonpool"
 	"github.com/blagojts/viper"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/pkg/query"
+	"github.com/timescale/tsbs/pkg/targets/kaiwudb"
+	"github.com/timescale/tsbs/pkg/targets/kaiwudb/commonpool"
 )
 
 var (

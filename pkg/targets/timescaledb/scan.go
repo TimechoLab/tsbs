@@ -4,8 +4,8 @@ import (
 	"hash/fnv"
 	"strings"
 
-	"github.com/TimechoLab/tsbs/pkg/data"
-	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/targets"
 )
 
 const (

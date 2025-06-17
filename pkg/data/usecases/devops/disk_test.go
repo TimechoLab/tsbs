@@ -2,7 +2,7 @@ package devops
 
 import (
 	"bytes"
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 	"math/rand"
 	"testing"
 	"time"

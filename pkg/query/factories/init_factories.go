@@ -1,21 +1,21 @@
 package factories
 
 import (
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/akumuli"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/cassandra"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/clickhouse"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/cratedb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/influx"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/iotdb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/kaiwudb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/mongo"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/questdb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/siridb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/timescaledb"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/timestream"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/databases/victoriametrics"
-	"github.com/TimechoLab/tsbs/pkg/query/config"
-	"github.com/TimechoLab/tsbs/pkg/targets/constants"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/akumuli"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/cassandra"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/clickhouse"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/cratedb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/influx"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/iotdb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/kaiwudb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/mongo"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/questdb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/siridb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/timescaledb"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/timestream"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/databases/victoriametrics"
+	"github.com/timescale/tsbs/pkg/query/config"
+	"github.com/timescale/tsbs/pkg/targets/constants"
 )
 
 func InitQueryFactories(config *config.QueryGeneratorConfig) map[string]interface{} {

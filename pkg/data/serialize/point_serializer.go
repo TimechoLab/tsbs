@@ -1,7 +1,7 @@
 package serialize
 
 import (
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 	"io"
 )
 

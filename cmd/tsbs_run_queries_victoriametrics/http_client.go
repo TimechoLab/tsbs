@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 var bytesSlash = []byte("/") // heap optimization
@@ -18,11 +18,11 @@ var bytesSlash = []byte("/") // heap optimization
 // HTTPClient is a reusable HTTP Client.
 type HTTPClient struct {
 	//client     fasthttp.Client
-	client     *http.Client
+	client *http.Client
 	// Host       []byte
 	// HostString string
 	// uri        []byte
-	Url				string
+	Url string
 }
 
 // HTTPClientDoOptions wraps options uses when calling `Do`.
@@ -52,14 +52,13 @@ func NewHTTPClient(url string) *HTTPClient {
 		host = host[:len(host)-1]
 	}*/
 	return &HTTPClient{
-		client:     getHttpClient(),
-	//	Host:       []byte(host),
-	//	HostString: host,
-	//	uri:        []byte{}, // heap optimization
-		Url:		url,
+		client: getHttpClient(),
+		//	Host:       []byte(host),
+		//	HostString: host,
+		//	uri:        []byte{}, // heap optimization
+		Url: url,
 	}
 }
-
 
 // Do performs the action specified by the given Query. It uses fasthttp, and
 // tries to minimize heap allocations.

@@ -1,20 +1,20 @@
 package main
 
 import (
-    "context"
+	"context"
 	"fmt"
 	"hash/fnv"
 	"log"
 	"sync"
 	"time"
 
-    "go.mongodb.org/mongo-driver/bson"
-    "go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
-	"github.com/TimechoLab/tsbs/load"
-	"github.com/TimechoLab/tsbs/pkg/data"
-	"github.com/TimechoLab/tsbs/pkg/targets"
-    tsbsMongo "github.com/TimechoLab/tsbs/pkg/targets/mongo"
+	"github.com/timescale/tsbs/load"
+	"github.com/timescale/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/targets"
+	tsbsMongo "github.com/timescale/tsbs/pkg/targets/mongo"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type hostnameIndexer struct {
@@ -23,7 +23,7 @@ type hostnameIndexer struct {
 
 func (i *hostnameIndexer) GetIndex(item data.LoadedPoint) uint {
 	p := item.Data.(*tsbsMongo.MongoPoint)
-    t := &tsbsMongo.MongoTag{}
+	t := &tsbsMongo.MongoTag{}
 	for j := 0; j < p.TagsLength(); j++ {
 		p.Tags(t, j)
 		key := string(t.Key())
@@ -63,7 +63,7 @@ func (b *aggBenchmark) GetPointIndexer(maxPartitions uint) targets.PointIndexer 
 // point is a reusable data structure to store a BSON data document for Mongo,
 // that can then be manipulated for bookkeeping and final document preparation
 type point struct {
-    Timestamp time.Time              `bson:"timestamp_ns"`
+	Timestamp time.Time              `bson:"timestamp_ns"`
 	Fields    map[string]interface{} `bson:"fields"`
 }
 
@@ -103,30 +103,31 @@ func (p *aggProcessor) Init(_ int, doLoad, _ bool) {
 // is first encountered)
 //
 // A document is structured like so:
-//  {
-//    "doc_id": "day_x_00",
-//    "key_id": "x_00",
-//    "measurement": "cpu",
-//    "tags": {
-//      "hostname": "host0",
-//      ...
-//    },
-//    "events": [
-//      [
-//        {
-//          "field1": 0.0,
-//          ...
-//		  }
-//      ]
-//    ]
-//  }
+//
+//	 {
+//	   "doc_id": "day_x_00",
+//	   "key_id": "x_00",
+//	   "measurement": "cpu",
+//	   "tags": {
+//	     "hostname": "host0",
+//	     ...
+//	   },
+//	   "events": [
+//	     [
+//	       {
+//	         "field1": 0.0,
+//	         ...
+//			  }
+//	     ]
+//	   ]
+//	 }
 func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) {
 	docToEvents := make(map[string][]*point)
 	batch := b.(*batch)
 
 	eventCnt := uint64(0)
 	for _, event := range batch.arr {
-	    tagsSlice := bson.D{}
+		tagsSlice := bson.D{}
 		tagsMap := map[string]string{}
 		t := &tsbsMongo.MongoTag{}
 		for j := 0; j < event.TagsLength(); j++ {
@@ -136,8 +137,8 @@ func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint6
 		}
 
 		// Determine which document this event belongs too
-        ts := time.Unix(0, event.Timestamp())
-        dateKey := ts.UTC().Format(aggDateFmt)
+		ts := time.Unix(0, event.Timestamp())
+		dateKey := ts.UTC().Format(aggDateFmt)
 		docKey := fmt.Sprintf("day_%s_%s_%s", tagsMap["hostname"], dateKey, string(event.MeasurementName()))
 
 		// Check that it has been created using a cached map, if not, add
@@ -145,23 +146,23 @@ func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint6
 		_, ok := p.createdDocs[docKey]
 		if !ok {
 			if _, ok := p.createdDocs[docKey]; !ok {
-                if randomFieldOrder {
-                    p.createQueue = append(p.createQueue, bson.M{
-                        aggDocID:      docKey,
-                        aggKeyID:      dateKey,
-                        "measurement": string(event.MeasurementName()),
-                        "tags":        tagsMap,
-                        "events":      emptyDoc,
-                    })
-                } else {
-                    p.createQueue = append(p.createQueue, bson.D{
-                        {aggDocID,      docKey},
-                        {aggKeyID,      dateKey},
-                        {"measurement", string(event.MeasurementName())},
-                        {"tags",        tagsSlice},
-                        {"events",      emptyDoc},
-                    })
-                }
+				if randomFieldOrder {
+					p.createQueue = append(p.createQueue, bson.M{
+						aggDocID:      docKey,
+						aggKeyID:      dateKey,
+						"measurement": string(event.MeasurementName()),
+						"tags":        tagsMap,
+						"events":      emptyDoc,
+					})
+				} else {
+					p.createQueue = append(p.createQueue, bson.D{
+						{aggDocID, docKey},
+						{aggKeyID, dateKey},
+						{"measurement", string(event.MeasurementName())},
+						{"tags", tagsSlice},
+						{"events", emptyDoc},
+					})
+				}
 			}
 			p.createdDocs[docKey] = true
 		}
@@ -186,8 +187,8 @@ func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint6
 
 	if doLoad {
 		// Checks if any new documents need to be made and does so
-        insertNewAggregateDocs(p.collection, p.createQueue)
-        models := make([]mongo.WriteModel, len(docToEvents))
+		insertNewAggregateDocs(p.collection, p.createQueue)
+		models := make([]mongo.WriteModel, len(docToEvents))
 		p.createQueue = p.createQueue[:0]
 
 		// For each document, create one 'set' command for all records
@@ -197,8 +198,8 @@ func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint6
 			selector := bson.M{aggDocID: docKey}
 			updateMap := bson.M{}
 			for _, event := range events {
-                minKey := event.Timestamp.Minute()
-                secKey := event.Timestamp.Second()
+				minKey := event.Timestamp.Minute()
+				secKey := event.Timestamp.Second()
 				key := fmt.Sprintf("events.%d.%d", minKey, secKey)
 				val := event.Fields
 
@@ -206,13 +207,13 @@ func (p *aggProcessor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint6
 				updateMap[key] = val
 			}
 
-                models[i] = mongo.NewUpdateOneModel().SetFilter(selector).SetUpdate(bson.M{"$set": updateMap})
-                i++
+			models[i] = mongo.NewUpdateOneModel().SetFilter(selector).SetUpdate(bson.M{"$set": updateMap})
+			i++
 		}
 
 		// All documents accounted for, finally run the operation
 		opts := options.BulkWrite().SetOrdered(orderedInserts)
-        _, err := p.collection.BulkWrite(context.Background(), models, opts)
+		_, err := p.collection.BulkWrite(context.Background(), models, opts)
 		if err != nil {
 			log.Fatalf("Bulk aggregate update err: %s\n", err.Error())
 		}

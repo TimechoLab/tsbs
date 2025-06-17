@@ -3,7 +3,7 @@ package load
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/pkg/targets"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/spf13/pflag"
-	"github.com/TimechoLab/tsbs/load/insertstrategy"
+	"github.com/timescale/tsbs/load/insertstrategy"
 )
 
 const (
@@ -181,7 +181,7 @@ func (l *CommonBenchmarkRunner) saveTestResult(took time.Duration, start time.Ti
 
 // RunBenchmark takes in a Benchmark b and uses it to run the load benchmark
 func (l *CommonBenchmarkRunner) RunBenchmark(b targets.Benchmark) {
-    wg, start, cleanupFn := l.preRun(b)
+	wg, start, cleanupFn := l.preRun(b)
 	var numChannels, capacity uint
 	if l.HashWorkers {
 		numChannels = l.Workers
@@ -207,7 +207,7 @@ func (l *CommonBenchmarkRunner) RunBenchmark(b targets.Benchmark) {
 		c.close()
 	}
 
-    cleanupFn()
+	cleanupFn()
 	l.postRun(wg, start)
 }
 

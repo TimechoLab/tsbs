@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/gocql/gocql"
-	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/timescale/tsbs/internal/utils"
 )
 
 // A ClientSideIndex wraps runtime data used to translate an HLQuery into

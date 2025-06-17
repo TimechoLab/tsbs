@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/iot"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/iot"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 // IoT produces KaiwuDB-specific queries for all the iot query types.

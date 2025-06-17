@@ -3,9 +3,9 @@ package cassandra
 import (
 	"bufio"
 	"fmt"
-	"github.com/TimechoLab/tsbs/pkg/data"
-	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
-	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data/usecases/common"
+	"github.com/timescale/tsbs/pkg/targets"
 	"log"
 	"strings"
 	"sync"

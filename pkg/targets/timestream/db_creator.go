@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/service/timestreamwrite"
 	"github.com/pkg/errors"
-	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/pkg/targets"
 	"log"
 	"time"
 )

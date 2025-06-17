@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/timescale/tsbs/internal/utils"
 )
 
 type TimeIntervals []*utils.TimeInterval

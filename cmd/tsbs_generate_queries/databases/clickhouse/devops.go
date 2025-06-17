@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 // TODO: Remove the need for this by continuing to bubble up errors
@@ -169,7 +169,7 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 		strings.Join(selectClauses, ", "),                   // cpu_avg SELECT %s
 		interval.Start().Format(clickhouseTimeStringFormat), // cpu_avg time >= '%s'
 		interval.End().Format(clickhouseTimeStringFormat),   // cpu_avg time < '%s'
-		joinClause,                                          // JOIN clause
+		joinClause,    // JOIN clause
 		hostnameField) // ORDER BY %s
 
 	humanLabel := devops.GetDoubleGroupByLabel("ClickHouse", numMetrics)

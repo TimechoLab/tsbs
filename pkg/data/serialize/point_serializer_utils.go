@@ -3,7 +3,7 @@ package serialize
 import (
 	"bytes"
 	"fmt"
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 	"testing"
 	"time"
 )

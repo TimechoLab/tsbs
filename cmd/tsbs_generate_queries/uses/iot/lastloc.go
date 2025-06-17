@@ -1,9 +1,9 @@
 package iot
 
 import (
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/common"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/common"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 // LastLocPerTruck contains info for filling in last location queries.

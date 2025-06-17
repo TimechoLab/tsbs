@@ -13,10 +13,10 @@ import (
 	"io"
 	"sort"
 
-	"github.com/TimechoLab/tsbs/pkg/data"
 	"github.com/golang/protobuf/proto"
 	"github.com/prometheus/common/model"
 	"github.com/timescale/promscale/pkg/prompb"
+	"github.com/timescale/tsbs/pkg/data"
 )
 
 const serializerVersion uint64 = 1

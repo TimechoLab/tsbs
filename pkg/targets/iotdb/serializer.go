@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/apache/iotdb-client-go/client"
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 )
 
 // Serializer writes a Point in a serialized form for IoTDB

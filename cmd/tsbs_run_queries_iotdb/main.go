@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/pkg/query"
 
 	"github.com/apache/iotdb-client-go/client"
 )

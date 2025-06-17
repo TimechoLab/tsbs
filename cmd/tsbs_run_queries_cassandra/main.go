@@ -15,8 +15,8 @@ import (
 	"github.com/blagojts/viper"
 	"github.com/gocql/gocql"
 	"github.com/spf13/pflag"
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 const (

@@ -5,9 +5,9 @@ import (
 	"github.com/blagojts/viper"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/TimechoLab/tsbs/pkg/targets"
-	"github.com/TimechoLab/tsbs/pkg/targets/constants"
-	"github.com/TimechoLab/tsbs/pkg/targets/initializers"
+	"github.com/timescale/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/pkg/targets/constants"
+	"github.com/timescale/tsbs/pkg/targets/initializers"
 )
 
 type cmdRunner func(*cobra.Command, []string)

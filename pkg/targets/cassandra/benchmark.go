@@ -4,10 +4,10 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"github.com/TimechoLab/tsbs/load"
-	"github.com/TimechoLab/tsbs/pkg/data/source"
-	"github.com/TimechoLab/tsbs/pkg/targets"
 	"github.com/gocql/gocql"
+	"github.com/timescale/tsbs/load"
+	"github.com/timescale/tsbs/pkg/data/source"
+	"github.com/timescale/tsbs/pkg/targets"
 	"log"
 )
 

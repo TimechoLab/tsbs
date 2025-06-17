@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 
-	kaiwudb "github.com/TimechoLab/tsbs/pkg/targets/kaiwudb"
+	kaiwudb "github.com/timescale/tsbs/pkg/targets/kaiwudb"
 
-	"github.com/TimechoLab/tsbs/internal/utils"
-	"github.com/TimechoLab/tsbs/load"
-	"github.com/TimechoLab/tsbs/pkg/data/source"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
+	"github.com/timescale/tsbs/internal/utils"
+	"github.com/timescale/tsbs/load"
+	"github.com/timescale/tsbs/pkg/data/source"
 )
 
 func initProgramOptions() (*kaiwudb.LoadingOptions, load.BenchmarkRunner, *load.BenchmarkRunnerConfig) {

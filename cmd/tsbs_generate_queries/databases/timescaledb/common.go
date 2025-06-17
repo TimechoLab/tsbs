@@ -3,10 +3,10 @@ package timescaledb
 import (
 	"time"
 
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/iot"
-	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/TimechoLab/tsbs/pkg/query"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/iot"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/timescale/tsbs/pkg/query"
 )
 
 const goTimeFmt = "2006-01-02 15:04:05.999999 -0700"

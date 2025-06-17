@@ -2,7 +2,7 @@ package prometheus
 
 import (
 	"github.com/timescale/promscale/pkg/prompb"
-	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data"
 	"reflect"
 	"testing"
 	"time"

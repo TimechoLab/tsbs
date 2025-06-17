@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/TimechoLab/tsbs/pkg/data"
-	"github.com/TimechoLab/tsbs/pkg/data/serialize"
 	"github.com/apache/iotdb-client-go/client"
 	"github.com/stretchr/testify/require"
+	"github.com/timescale/tsbs/pkg/data"
+	"github.com/timescale/tsbs/pkg/data/serialize"
 )
 
 func TestIotdbFormat(t *testing.T) {

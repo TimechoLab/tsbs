@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb/thread"
 	pgx "github.com/jackc/pgx/v5"
 	"github.com/silenceper/pool"
+	"github.com/timescale/tsbs/pkg/targets/kaiwudb/thread"
 )
 
 type ConnectorPool struct {

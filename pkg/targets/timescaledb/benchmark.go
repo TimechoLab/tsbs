@@ -1,9 +1,9 @@
 package timescaledb
 
 import (
-	"github.com/TimechoLab/tsbs/internal/inputs"
-	"github.com/TimechoLab/tsbs/pkg/data/source"
-	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/timescale/tsbs/internal/inputs"
+	"github.com/timescale/tsbs/pkg/data/source"
+	"github.com/timescale/tsbs/pkg/targets"
 )
 
 const pgxDriver = "pgx"

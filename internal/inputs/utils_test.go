@@ -1,7 +1,7 @@
 package inputs
 
 import (
-	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/timescale/tsbs/internal/utils"
 	"testing"
 	"time"
 )

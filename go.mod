@@ -1,4 +1,4 @@
-module github.com/TimechoLab/tsbs
+module github.com/timescale/tsbs
 
 go 1.14
 

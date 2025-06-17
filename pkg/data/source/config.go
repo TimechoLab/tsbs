@@ -1,7 +1,7 @@
 package source
 
 import (
-	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
+	"github.com/timescale/tsbs/pkg/data/usecases/common"
 )
 
 const (
