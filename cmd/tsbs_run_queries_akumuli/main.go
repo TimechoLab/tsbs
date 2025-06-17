@@ -8,10 +8,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/query"
 )
 
 // Program option vars:

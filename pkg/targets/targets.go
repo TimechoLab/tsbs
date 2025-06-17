@@ -1,12 +1,12 @@
 package targets
 
 import (
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
 )
 
 type ImplementedTarget interface {

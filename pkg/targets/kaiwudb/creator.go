@@ -7,8 +7,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/benchant/tsbs/pkg/targets"
-	"github.com/benchant/tsbs/pkg/targets/kaiwudb/commonpool"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb/commonpool"
 )
 
 var fatal = log.Fatalf

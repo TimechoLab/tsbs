@@ -2,7 +2,7 @@ package victoriametrics
 
 import (
 	"bytes"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"log"
 	"net/http"
 	"time"

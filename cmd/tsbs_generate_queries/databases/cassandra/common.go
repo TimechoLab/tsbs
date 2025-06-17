@@ -4,10 +4,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
-	internalutils "github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
+	internalutils "github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 // BaseGenerator contains settings specific for Cassandra database.

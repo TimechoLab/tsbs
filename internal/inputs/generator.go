@@ -1,7 +1,7 @@
 package inputs
 
 import (
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
 )
 
 // Generator is an interface that defines a type that generates inputs to other

@@ -3,7 +3,7 @@ package load
 import (
 	"reflect"
 
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 )
 
 // ackAndMaybeSend adjust the unsent batches count

@@ -2,12 +2,12 @@ package iot
 
 import (
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data/usecases/iot"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/iot"
 	"math/rand"
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/common"
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/common"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 const (

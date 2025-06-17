@@ -2,14 +2,14 @@ package timestream
 
 import (
 	"fmt"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/andreyvit/diff"
-	"github.com/benchant/tsbs/pkg/query"
 	"math/rand"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
 )
 
 // getMeasureNameWhereString

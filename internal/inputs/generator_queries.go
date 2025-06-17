@@ -10,11 +10,11 @@ import (
 	"sort"
 	"time"
 
-	queryUtils "github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
-	internalUtils "github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
-	"github.com/benchant/tsbs/pkg/query/config"
-	"github.com/benchant/tsbs/pkg/query/factories"
+	queryUtils "github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
+	internalUtils "github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/query/config"
+	"github.com/TimechoLab/tsbs/pkg/query/factories"
 )
 
 // Error messages when using a QueryGenerator

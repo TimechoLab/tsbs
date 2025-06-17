@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	kaiwudb "github.com/benchant/tsbs/pkg/targets/kaiwudb"
+	kaiwudb "github.com/TimechoLab/tsbs/pkg/targets/kaiwudb"
 
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
 )

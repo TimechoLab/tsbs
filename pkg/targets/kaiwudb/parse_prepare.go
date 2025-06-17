@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
 )
 
 const layout = "2006-01-02 15:04:05.000"

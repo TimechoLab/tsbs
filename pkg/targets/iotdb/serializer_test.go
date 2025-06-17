@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
 	"github.com/apache/iotdb-client-go/client"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
 	"github.com/stretchr/testify/require"
 )
 

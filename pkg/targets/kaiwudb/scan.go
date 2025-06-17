@@ -3,8 +3,8 @@ package kaiwudb
 import (
 	"sync"
 
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 )
 
 // indexer is used to consistently send the same hostnames to the same worker

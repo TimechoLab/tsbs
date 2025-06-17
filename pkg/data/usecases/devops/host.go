@@ -2,7 +2,7 @@ package devops
 
 import (
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
 	"math"
 	"math/rand"
 	"reflect"

@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 var bytesSlash = []byte("/") // heap optimization

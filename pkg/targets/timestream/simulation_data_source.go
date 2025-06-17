@@ -1,9 +1,9 @@
 package timestream
 
 import (
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
 	"log"
 	"strconv"
 	"time"

@@ -1,7 +1,7 @@
 package load
 
 import (
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"sync"
 	"sync/atomic"
 	"time"

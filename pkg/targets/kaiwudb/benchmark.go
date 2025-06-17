@@ -1,8 +1,8 @@
 package kaiwudb
 
 import (
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 )
 
 var (

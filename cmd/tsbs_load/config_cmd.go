@@ -3,13 +3,13 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets/constants"
+	"github.com/TimechoLab/tsbs/pkg/targets/initializers"
 	"github.com/blagojts/viper"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/targets"
-	"github.com/benchant/tsbs/pkg/targets/constants"
-	"github.com/benchant/tsbs/pkg/targets/initializers"
 	"gopkg.in/yaml.v2"
 	"strings"
 )

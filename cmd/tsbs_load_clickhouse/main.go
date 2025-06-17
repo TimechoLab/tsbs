@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/targets"
-	"github.com/benchant/tsbs/pkg/targets/clickhouse"
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets/clickhouse"
 )
 
 // Global vars

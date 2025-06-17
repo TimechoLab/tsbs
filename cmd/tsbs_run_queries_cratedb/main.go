@@ -1,18 +1,18 @@
 package main
 
 import (
-    "database/sql"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"time"
 
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/blagojts/viper"
-    _ "github.com/jackc/pgx/v4/stdlib"
-    _ "github.com/lib/pq"
-    "github.com/pkg/errors"
-    "github.com/spf13/pflag"
-    "github.com/benchant/tsbs/internal/utils"
-    "github.com/benchant/tsbs/pkg/query"
+	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/lib/pq"
+	"github.com/pkg/errors"
+	"github.com/spf13/pflag"
 )
 
 const pgxDriver = "pgx" // default driver
@@ -25,10 +25,11 @@ var (
 	port        int
 	showExplain bool
 )
+
 // Global vars:
 var (
-    runner *query.BenchmarkRunner
-    driver string
+	runner *query.BenchmarkRunner
+	driver string
 )
 
 func init() {
@@ -64,7 +65,7 @@ func init() {
 	if showExplain {
 		runner.SetLimit(1)
 	}
-    driver = pgxDriver
+	driver = pgxDriver
 }
 
 func main() {
@@ -88,17 +89,17 @@ type executorOptions struct {
 func newProcessor() query.Processor { return &processor{} }
 
 func (p *processor) Init(workerNumber int) {
-    connStr := fmt.Sprintf("host=%s port=%d user=%s password='%s' dbname=%s", hosts, port, user, pass, runner.DatabaseName())
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password='%s' dbname=%s", hosts, port, user, pass, runner.DatabaseName())
 	db, err := sql.Open(driver, connStr)
-    	if err != nil {
-    		panic(err)
-    	}
-    	p.db = db
-    	p.opts = &executorOptions{
-    		showExplain:   showExplain,
-    		debug:         runner.DebugLevel() > 0,
-    		printResponse: runner.DoPrintResponses(),
-    	}
+	if err != nil {
+		panic(err)
+	}
+	p.db = db
+	p.opts = &executorOptions{
+		showExplain:   showExplain,
+		debug:         runner.DebugLevel() > 0,
+		printResponse: runner.DoPrintResponses(),
+	}
 }
 
 func (p *processor) ProcessQuery(q query.Query, isWarm bool) ([]*query.Stat, error) {
@@ -169,8 +170,8 @@ func mapRows(r *sql.Rows) []map[string]interface{} {
 		}
 
 		for i, column := range cols {
-            row[column] = *values[i].(*interface{})
-        }
+			row[column] = *values[i].(*interface{})
+		}
 		rows = append(rows, row)
 	}
 	return rows

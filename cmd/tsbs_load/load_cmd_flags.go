@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
 	"strings"
 	"time"
 )

@@ -3,10 +3,10 @@ package kaiwudb
 import (
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/iot"
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/iot"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 // BaseGenerator contains settings specific for Influx database.

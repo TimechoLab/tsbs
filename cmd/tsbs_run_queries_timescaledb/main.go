@@ -13,13 +13,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/blagojts/viper"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/query"
 )
 
 const pgxDriver = "pgx" // default driver

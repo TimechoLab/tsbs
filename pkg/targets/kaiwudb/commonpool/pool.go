@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/benchant/tsbs/pkg/targets/kaiwudb/thread"
+	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb/thread"
 	pgx "github.com/jackc/pgx/v5"
 	"github.com/silenceper/pool"
 )

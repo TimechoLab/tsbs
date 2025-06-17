@@ -3,10 +3,10 @@ package timescaledb
 import (
 	"fmt"
 
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 )
 
 func newSimulationDataSource(sim common.Simulator) targets.DataSource {

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"go.mongodb.org/mongo-driver/bson"
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/query"
 )
 
 // TODO: Remove the need for this by continuing to bubble up errors
@@ -49,14 +49,14 @@ func getTimeFilterPipeline(interval *utils.TimeInterval) []bson.M {
 							"$and": []interface{}{
 								bson.M{
 									"$gte": []interface{}{
-                                        "$$event.time",
-                                        interval.Start(),
+										"$$event.time",
+										interval.Start(),
 									},
 								},
 								bson.M{
 									"$lt": []interface{}{
-                                        "$$event.time",
-                                        interval.End(),
+										"$$event.time",
+										interval.End(),
 									},
 								},
 							},
@@ -286,8 +286,8 @@ func (d *Devops) GroupByTimeAndPrimaryTag(qi query.Query, numMetrics int) {
 	pipelineQuery = append(pipelineQuery, group)
 
 	// Add sort operators
-    sort := bson.M{"$sort": bson.D{{ "_id.time",1}, {"_id.hostname", 1}}}
-    pipelineQuery = append(pipelineQuery, sort)
+	sort := bson.M{"$sort": bson.D{{"_id.time", 1}, {"_id.hostname", 1}}}
+	pipelineQuery = append(pipelineQuery, sort)
 
 	humanLabel := devops.GetDoubleGroupByLabel("Mongo", numMetrics)
 	q := qi.(*query.Mongo)
@@ -322,8 +322,8 @@ func (d *Devops) HighCPUForHosts(qi query.Query, nHosts int) {
 		},
 	}
 	if nHosts > 0 {
-        hostnames, err := d.GetRandomHosts(nHosts)
-        panicIfErr(err)
+		hostnames, err := d.GetRandomHosts(nHosts)
+		panicIfErr(err)
 		matchMap := match["$match"].(bson.M)
 		matchMap["tags.hostname"] = bson.M{"$in": hostnames}
 	}

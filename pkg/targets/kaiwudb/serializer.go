@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/benchant/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data"
 )
 
 type Serializer struct {

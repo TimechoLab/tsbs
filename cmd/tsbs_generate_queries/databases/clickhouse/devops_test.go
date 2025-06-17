@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/devops"
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/devops"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 func TestDevopsGetHostWhereWithHostnames(t *testing.T) {

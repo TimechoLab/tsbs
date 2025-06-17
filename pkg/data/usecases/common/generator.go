@@ -3,8 +3,8 @@ package common
 import (
 	"fmt"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/targets/constants"
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/targets/constants"
 	"strings"
 	"time"
 )

@@ -3,7 +3,7 @@ package load
 import (
 	"bytes"
 	"fmt"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"strings"
 	"sync"
 	"sync/atomic"

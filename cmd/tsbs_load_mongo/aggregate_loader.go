@@ -11,10 +11,10 @@ import (
     "go.mongodb.org/mongo-driver/bson"
     "go.mongodb.org/mongo-driver/mongo"
     "go.mongodb.org/mongo-driver/mongo/options"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/targets"
-    tsbsMongo "github.com/benchant/tsbs/pkg/targets/mongo"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+    tsbsMongo "github.com/TimechoLab/tsbs/pkg/targets/mongo"
 )
 
 type hostnameIndexer struct {

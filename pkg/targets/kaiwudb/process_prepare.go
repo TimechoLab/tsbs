@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/benchant/tsbs/pkg/targets"
-	"github.com/benchant/tsbs/pkg/targets/kaiwudb/commonpool"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets/kaiwudb/commonpool"
 )
 
 const microSecFromUnixEpochToY2K = 946684800 * 1000000

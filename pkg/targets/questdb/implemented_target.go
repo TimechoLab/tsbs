@@ -1,12 +1,12 @@
 package questdb
 
 import (
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets/constants"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/pkg/data/serialize"
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/targets"
-	"github.com/benchant/tsbs/pkg/targets/constants"
 )
 
 func NewTarget() targets.ImplementedTarget {

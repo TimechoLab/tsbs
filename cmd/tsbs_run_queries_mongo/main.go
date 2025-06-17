@@ -5,7 +5,7 @@
 package main
 
 import (
-    "context"
+	"context"
 	"encoding/gob"
 	"fmt"
 	"log"
@@ -15,10 +15,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/pkg/query"
 )
 
 // Program option vars:
@@ -29,7 +29,7 @@ var (
 
 // Global vars:
 var (
-    runner *query.BenchmarkRunner
+	runner *query.BenchmarkRunner
 	client *mongo.Client
 )
 
@@ -71,7 +71,7 @@ func init() {
 func main() {
 	var err error
 	opts := options.Client().ApplyURI(daemonURL).SetSocketTimeout(timeout)
-    client, err = mongo.Connect(context.Background(), opts)
+	client, err = mongo.Connect(context.Background(), opts)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -85,21 +85,21 @@ type processor struct {
 func newProcessor() query.Processor { return &processor{} }
 
 func (p *processor) Init(workerNumber int) {
-    p.collection = client.Database(runner.DatabaseName()).Collection("point_data")
+	p.collection = client.Database(runner.DatabaseName()).Collection("point_data")
 }
 
 func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
 	mq := q.(*query.Mongo)
 	start := time.Now().UnixNano()
 	cursor, err := p.collection.Aggregate(context.Background(), mq.BsonDoc)
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 	if runner.DebugLevel() > 0 {
 		fmt.Println(mq.BsonDoc)
 	}
 	cnt := 0
-    for cursor.Next(context.Background()) {
+	for cursor.Next(context.Background()) {
 		if runner.DoPrintResponses() {
 			fmt.Printf("ID %d: %v\n", q.GetID(), cursor.Current)
 		}

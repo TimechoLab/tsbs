@@ -5,9 +5,9 @@ import (
 	"bytes"
 	"errors"
 	"github.com/blagojts/viper"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"sync"
 )
 

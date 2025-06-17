@@ -1,5 +1,5 @@
 package timestream
 
-import "github.com/benchant/tsbs/pkg/targets/timescaledb"
+import "github.com/TimechoLab/tsbs/pkg/targets/timescaledb"
 
 type serializer = timescaledb.Serializer

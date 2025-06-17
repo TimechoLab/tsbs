@@ -1,4 +1,4 @@
-module github.com/benchant/tsbs
+module github.com/TimechoLab/tsbs
 
 go 1.14
 

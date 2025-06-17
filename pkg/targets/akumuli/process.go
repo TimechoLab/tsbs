@@ -2,7 +2,7 @@ package akumuli
 
 import (
 	"encoding/binary"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"log"
 	"net"
 	"sync"

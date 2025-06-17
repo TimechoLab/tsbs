@@ -2,8 +2,8 @@ package source
 
 import (
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
-	"github.com/benchant/tsbs/pkg/targets/constants"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/targets/constants"
 	"testing"
 	"time"
 )

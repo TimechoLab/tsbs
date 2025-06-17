@@ -1,8 +1,8 @@
 package timestream
 
 import (
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"sync"
 )
 

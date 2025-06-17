@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 )
 
 func TestScanWithoutFlowControl(t *testing.T) {

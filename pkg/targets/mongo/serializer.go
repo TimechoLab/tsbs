@@ -3,7 +3,7 @@ package mongo
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data"
 	"io"
 	"sync"
 

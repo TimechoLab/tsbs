@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"bytes"
 	"github.com/apache/iotdb-client-go/client"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/targets"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/targets"
 	"github.com/spaolacci/murmur3"
 	"math"
 )

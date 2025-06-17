@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/timescale/promscale/pkg/prompb"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
 )
 
 func TestPrometheusSerializer(t *testing.T) {

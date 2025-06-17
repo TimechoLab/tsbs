@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/usecases/common"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/usecases/common"
 )
 
 func TestHostnameIndexer(t *testing.T) {

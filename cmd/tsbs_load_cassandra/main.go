@@ -6,14 +6,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/TimechoLab/tsbs/internal/utils"
+	"github.com/TimechoLab/tsbs/load"
+	"github.com/TimechoLab/tsbs/pkg/data/source"
+	"github.com/TimechoLab/tsbs/pkg/targets/cassandra"
+	"github.com/TimechoLab/tsbs/pkg/targets/constants"
+	"github.com/TimechoLab/tsbs/pkg/targets/initializers"
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/benchant/tsbs/internal/utils"
-	"github.com/benchant/tsbs/load"
-	"github.com/benchant/tsbs/pkg/data/source"
-	"github.com/benchant/tsbs/pkg/targets/cassandra"
-	"github.com/benchant/tsbs/pkg/targets/constants"
-	"github.com/benchant/tsbs/pkg/targets/initializers"
 )
 
 // Parse args:

@@ -3,9 +3,9 @@ package devops
 import (
 	"time"
 
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/uses/common"
-	"github.com/benchant/tsbs/cmd/tsbs_generate_queries/utils"
-	"github.com/benchant/tsbs/pkg/query"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/uses/common"
+	"github.com/TimechoLab/tsbs/cmd/tsbs_generate_queries/utils"
+	"github.com/TimechoLab/tsbs/pkg/query"
 )
 
 // SingleGroupby contains info for filling in single groupby queries

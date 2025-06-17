@@ -2,8 +2,8 @@ package timescaledb
 
 import (
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data"
-	"github.com/benchant/tsbs/pkg/data/serialize"
+	"github.com/TimechoLab/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data/serialize"
 	"io"
 )
 

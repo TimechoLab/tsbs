@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/benchant/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data"
 	"math"
 	"testing"
 	"time"

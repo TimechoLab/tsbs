@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/timescale/promscale/pkg/prompb"
-	"github.com/benchant/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data"
 )
 
 func TestRandomPointIndexer(t *testing.T) {

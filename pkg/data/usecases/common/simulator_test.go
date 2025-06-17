@@ -2,7 +2,7 @@ package common
 
 import (
 	"fmt"
-	"github.com/benchant/tsbs/pkg/data"
+	"github.com/TimechoLab/tsbs/pkg/data"
 	"testing"
 	"time"
 )
