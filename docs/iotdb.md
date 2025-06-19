@@ -120,3 +120,7 @@ The password for user connecting to IoTDB.
 #### `-use-groupby` (type: `bool`, default: `false`)
 
 Used to accelerate the query performance of `single-groupby-1-1-1`.
+
+#### '-use-fast-last-query' (type: `bool`, default: `false`)
+
+Used to accelerate the query performance of `lastpoint`.

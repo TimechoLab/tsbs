@@ -12,10 +12,11 @@ type IoTDB struct {
 	HumanDescription []byte
 	id               uint64
 
-	AggregatePaths []string
-	StartTime      int64
-	EndTime        int64
-	SqlQuery       []byte
+	AggregatePaths     []string
+	StartTime          int64
+	EndTime            int64
+	SqlQuery           []byte
+	LastQueryPathNodes []string
 }
 
 // IoTDBPool is a sync.Pool of IoTDB Query types

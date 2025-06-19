@@ -1,6 +1,7 @@
 package iotdb
 
 import (
+	"strings"
 	"time"
 
 	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
@@ -39,6 +40,14 @@ func (g *BaseGenerator) fillInAggregation(qi query.Query, humanLabel, humanDesc 
 	q.AggregatePaths = aggregationPaths
 	q.StartTime = startTime
 	q.EndTime = endTime
+}
+
+func (g *BaseGenerator) fillInLast(qi query.Query, path, sql, humanLabel, humanDesc string) {
+	q := qi.(*query.IoTDB)
+	q.LastQueryPathNodes = strings.Split(path, ".")
+	q.HumanLabel = []byte(humanLabel)
+	q.HumanDescription = []byte(humanDesc)
+	q.SqlQuery = []byte(sql)
 }
 
 // NewDevops creates a new devops use case query generator.

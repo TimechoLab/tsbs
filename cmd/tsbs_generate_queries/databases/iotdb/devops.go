@@ -139,8 +139,7 @@ func (d *Devops) LastPointPerHost(qi query.Query) {
 	humanDesc := humanLabel + ": cpu"
 
 	sql := fmt.Sprintf("SELECT LAST * FROM %s.cpu.*", d.BasicPath)
-
-	d.fillInQuery(qi, humanLabel, humanDesc, sql)
+	d.fillInLast(qi, fmt.Sprintf("%s.cpu.*", d.BasicPath), sql, humanLabel, humanDesc)
 }
 
 // MaxAllCPU selects the MAX of all metrics under 'cpu' per hour for nhosts hosts,

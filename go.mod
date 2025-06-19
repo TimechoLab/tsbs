@@ -10,7 +10,6 @@ require (
 	github.com/apache/iotdb-client-go v1.3.4
 	github.com/aws/aws-sdk-go v1.35.13
 	github.com/blagojts/viper v1.6.3-0.20200313094124-068f44cf5e69
-	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gocql/gocql v0.0.0-20190810123941-df4b9cc33030
 	github.com/golang/protobuf v1.4.2
@@ -29,6 +28,7 @@ require (
 	github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/pflag v1.0.5
+	github.com/stretchr/testify v1.8.2
 	github.com/timescale/promscale v0.0.0-20201006153045-6a66a36f5c84
 	github.com/tklauser/go-sysconf v0.3.5 // indirect
 	github.com/transceptor-technology/go-qpack v0.0.0-20190116123619-49a14b216a45
@@ -38,4 +38,7 @@ require (
 	golang.org/x/net v0.6.0
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e
 	gopkg.in/yaml.v2 v2.3.0
+
 )
+
+replace github.com/apache/iotdb-client-go v1.3.4 => github.com/shuwenwei/iotdb-client-go v0.0.0-20250619101726-eda4a646a170

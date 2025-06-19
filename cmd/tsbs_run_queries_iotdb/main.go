@@ -17,12 +17,13 @@ import (
 
 // database option vars
 var (
-	clientConfig         client.Config
-	timeoutInMs          int64 // 0 for no timeout
-	usingGroupByApi      bool  // if using group by api when executing query
-	singleDatabase       bool  // if using single database, e.g. only one database: root.db. root.db.cpu, root.db.mem belongs to this databse
-	useAlignedTimeseries bool  // using aligned timeseries if set true.
-	sessionPoolSize      int
+	clientConfig          client.Config
+	timeoutInMs           int64 // 0 for no timeout
+	usingGroupByApi       bool  // if using group by api when executing query
+	usingFastLastQueryApi bool
+	singleDatabase        bool // if using single database, e.g. only one database: root.db. root.db.cpu, root.db.mem belongs to this databse
+	useAlignedTimeseries  bool // using aligned timeseries if set true.
+	sessionPoolSize       int
 )
 
 // Global vars:
@@ -41,6 +42,7 @@ func init() {
 	pflag.String("user", "root", "The user who connect to IoTDB")
 	pflag.String("password", "root", "The password for user connecting to IoTDB")
 	pflag.Bool("use-groupby", false, "Whether to use group by api")
+	pflag.Bool("use-fast-last-query", false, "Whether to use fast last query api")
 	pflag.Bool("single-database", false, "Whether to use single database")
 	pflag.Bool("aligned-timeseries", false, "Whether to use aligned time series")
 	pflag.Uint("session-pool-size", 0, "Session pool size")
@@ -63,6 +65,7 @@ func init() {
 	password := "root"
 	workers := viper.GetUint("workers")
 	usingGroupByApi = viper.GetBool("use-groupby")
+	usingFastLastQueryApi = viper.GetBool("use-fast-last-query")
 	singleDatabase = viper.GetBool("single-database")
 	useAlignedTimeseries = viper.GetBool("aligned-timeseries")
 	sessionPoolSize = viper.GetInt("session-pool-size")
@@ -139,6 +142,7 @@ func (p *processor) Init(workerNumber int) {
 func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
 	iotdbQ := q.(*query.IoTDB)
 	sql := string(iotdbQ.SqlQuery)
+	lastQueryPath := iotdbQ.LastQueryPathNodes
 	aggregatePaths := iotdbQ.AggregatePaths
 	var interval int64 = 60000
 	var startTimeInMills = iotdbQ.StartTime
@@ -218,17 +222,48 @@ func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
 			}
 		}
 	} else {
-		if sessionPoolSize > 0 {
-			session, err := sessionPool.GetSession()
-			if err == nil {
-				dataSet, err = session.ExecuteQueryStatement(sql, &timeoutInMs)
+		if usingFastLastQueryApi && lastQueryPath != nil && len(lastQueryPath) != 0 {
+			if sessionPoolSize > 0 {
+				session, err := sessionPool.GetSession()
+				if err == nil {
+					dataSet, err = session.ExecuteFastLastDataQueryForOnePrefixPath(lastQueryPath, &timeoutInMs)
+				} else {
+					log.Printf("Get session meets error.\n")
+				}
+				sessionPool.PutBack(session)
 			} else {
-				log.Printf("Get session meets error.\n")
+				dataSet, err = p.session.ExecuteFastLastDataQueryForOnePrefixPath(lastQueryPath, &timeoutInMs)
 			}
-			sessionPool.PutBack(session)
+			if err == nil {
+				if p.printResponses {
+					sql = fmt.Sprintf("Response for ExecuteFastLastDataQueryForOnePrefixPath, prefixPath: %s",
+						lastQueryPath)
+					printDataSet(sql, dataSet)
+				}
+			}
 		} else {
-			dataSet, err = p.session.ExecuteQueryStatement(sql, &timeoutInMs)
+			if sessionPoolSize > 0 {
+				session, err := sessionPool.GetSession()
+				if err == nil {
+					dataSet, err = session.ExecuteQueryStatement(sql, &timeoutInMs)
+				} else {
+					log.Printf("Get session meets error.\n")
+				}
+				sessionPool.PutBack(session)
+			} else {
+				dataSet, err = p.session.ExecuteQueryStatement(sql, &timeoutInMs)
+			}
+			if err == nil {
+				if p.printResponses {
+					sql = fmt.Sprintf("Response for ExecuteQueryStatement, sql: %s",
+						sql)
+					printDataSet(sql, dataSet)
+				}
+			}
 		}
+	}
+	if dataSet != nil {
+		defer dataSet.Close()
 	}
 
 	if err != nil {
@@ -244,24 +279,20 @@ func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
 
 func printDataSet(sql string, sds *client.SessionDataSet) {
 	fmt.Printf("\nResponse for query '%s':\n", sql)
-	showTimestamp := !sds.IsIgnoreTimeStamp()
-	if showTimestamp {
-		fmt.Print("Time\t\t\t\t")
-	}
 
-	for i := 0; i < sds.GetColumnCount(); i++ {
-		fmt.Printf("%s\t", sds.GetColumnName(i))
+	for i := 0; i < len(sds.GetColumnNames()); i++ {
+		fmt.Printf("%s\t", sds.GetColumnNames()[i])
 	}
 	fmt.Println()
 
 	printedColsCount := 0
 	for next, err := sds.Next(); err == nil && next; next, err = sds.Next() {
-		if showTimestamp {
-			fmt.Printf("%s\t", sds.GetText(client.TimestampColumnName))
-		}
-		for i := 0; i < sds.GetColumnCount(); i++ {
-			columnName := sds.GetColumnName(i)
-			v := sds.GetValue(columnName)
+		for i := 0; i < len(sds.GetColumnNames()); i++ {
+			columnName := sds.GetColumnNames()[i]
+			v, err := sds.GetObject(columnName)
+			if err != nil {
+				log.Fatal(err)
+			}
 			if v == nil {
 				v = "null"
 			}

@@ -37,11 +37,20 @@ func (d *dbCreator) getAllStorageGroup() ([]string, error) {
 	var sgList []string
 
 	for next, err := sessionDataSet.Next(); err == nil && next; next, err = sessionDataSet.Next() {
-		for i := 0; i < sessionDataSet.GetColumnCount(); i++ {
-			columnName := sessionDataSet.GetColumnName(i)
-			switch sessionDataSet.GetColumnDataType(i) {
+		for i := 0; i < len(sessionDataSet.GetColumnNames()); i++ {
+			columnName := sessionDataSet.GetColumnNames()[i]
+			dataType, err := client.GetDataTypeByStr(sessionDataSet.GetColumnTypes()[i])
+			if err != nil {
+				return nil, err
+			}
+			switch dataType {
 			case client.TEXT:
-				sgList = append(sgList, sessionDataSet.GetText(columnName))
+				if value, err := sessionDataSet.GetString(columnName); err != nil {
+					return nil, err
+				} else {
+					sgList = append(sgList, value)
+				}
+
 			default:
 			}
 		}
